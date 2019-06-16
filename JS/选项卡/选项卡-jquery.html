@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡-jquery</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .tab{
+            margin: 30px auto;
+            width: 500px; 
+        }
+        .title li{
+            height: 30px;
+            width: 60px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #999;
+            border-bottom: 2px solid #a00;
+            display: inline-block;  
+        }
+        .title li:hover{
+            cursor: pointer;  
+        }
+        .title li.active{
+            border-top: 2px solid #a00;
+            border-bottom: 2px solid #999;
+        }
+        .content{
+            width: 300px;
+            border: 1px solid #999;
+            border-top: 2px solid #a00;
+            margin-top: -2px;
+        }
+        .content div{
+            display: none;
+        }
+        .content .mod{
+            display: block;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="title">
+            <li class="active">标题1</li>
+            <li>标题2</li>
+            <li>标题3</li>
+        </ul>
+        <div class="content">
+            <div class="mod">
+                <ul>
+                    <li>内容1-1</li>
+                    <li>内容1-2</li>
+                    <li>内容1-3</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>内容2-1</li>
+                    <li>内容2-2</li>
+                    <li>内容2-3</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>内容3-1</li>
+                    <li>内容3-2</li>
+                    <li>内容3-3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+           $('.title li').click(function(){
+               $(this).addClass('active').siblings().removeClass('active');
+               $('.content div').eq($('.title li').index(this)).addClass('mod').siblings().removeClass('mod');
+           })
+        })
+    </script>
+</body>
+
+</html>

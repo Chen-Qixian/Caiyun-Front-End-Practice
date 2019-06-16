@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡-js事件委托</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .tab{
+            margin: 30px auto;
+            width: 500px; 
+        }
+        .title li{
+            height: 30px;
+            width: 60px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #999;
+            border-bottom: 2px solid #a00;
+            display: inline-block;  
+        }
+        .title li:hover{
+            cursor: pointer;  
+        }
+        .title li.active{
+            border-top: 2px solid #a00;
+            border-bottom: 2px solid #999;
+        }
+        .content{
+            width: 300px;
+            border: 1px solid #999;
+            border-top: 2px solid #a00;
+            margin-top: -2px;
+        }
+        .content div{
+            display: none;
+        }
+        .content .mod{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="title">
+            <li class="active">标题1</li>
+            <li>标题2</li>
+            <li>标题3</li>
+        </ul>
+        <div class="content">
+            <div class="mod">
+                <ul>
+                    <li>内容1-1</li>
+                    <li>内容1-2</li>
+                    <li>内容1-3</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>内容2-1</li>
+                    <li>内容2-2</li>
+                    <li>内容2-3</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>内容3-1</li>
+                    <li>内容3-2</li>
+                    <li>内容3-3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let title = document.getElementsByClassName('title')[0];
+        let content = document.getElementsByClassName('content')[0];
+        let titleList = title.getElementsByTagName('li');
+        let contentList = content.getElementsByTagName('div');
+
+        function getIndex(t){
+            for(let i = 0; i < titleList.length ; i ++){
+                if(titleList[i] == t) {
+                    return i;
+                }
+            }
+        }
+
+        // 事件委托：冒泡原理，为父元素ul绑定监听事件
+        title.onclick = function(e){
+            // 兼容浏览器
+            e = e || window.event;
+            let target = e.target || e.srcElement;
+            if(target.nodeName.toLowerCase() == 'li'){
+                for(let i = 0 ; i < titleList.length ; i ++){
+                    titleList[i].className = '';
+                    contentList[i].className = '';
+                }
+                titleList[getIndex(target)].className = 'active';
+                contentList[getIndex(target)].className = 'mod';
+            }
+        }
+    </script>
+</body>
+
+</html>
