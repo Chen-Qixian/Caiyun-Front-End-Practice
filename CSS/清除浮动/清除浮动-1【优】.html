@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>清除浮动-法1</title>
+    <style>
+        #container {
+            border: 2px solid red;
+            margin: 30px auto;
+            width: 90%;
+        }
+
+        #container::after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        /* 兼容IE */
+        .clearfix{
+            zoom: 1;
+        }
+
+        .float1,
+        .float2,
+        .float3 {
+            height: 100px;
+            background: green;
+            width: 200px;
+            float: left;
+        }
+
+        .float2 {
+            background-color: #0087D1;
+        }
+
+        .float3 {
+            background-color: blue;
+            float: right;
+        }
+    </style>
+</head>
+
+
+<div id="container" class="clearfix">
+    <div class="float1">
+        <h2>float left</h2>
+    </div>
+    <div class="float2">
+        <h2>float left</h2>
+    </div>
+    <div class="float3">
+        <h2>float right</h2>
+    </div>
+</div>
+
+</html>
