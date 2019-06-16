@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>处理函数执行顺序3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 400px;
+            height: 400px;
+            background: #f00;
+        }
+
+        #div2 {
+            width: 300px;
+            height: 300px;
+            background: #0f0;
+        }
+
+        #div3 {
+            width: 200px;
+            height: 200px;
+            background: #00f;
+        }
+
+        #div4 {
+            width: 100px;
+            height: 100px;
+            background: #f0f;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="div1">我是div1
+        <div id="div2">我是div2
+            <div id="div3">我是div3
+                <div id="div4">我是div4</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let div1 = document.getElementById('div1');
+        let div2 = document.getElementById('div2');
+        let div3 = document.getElementById('div3');
+        let div4 = document.getElementById('div4');
+
+        // IE -> 事件冒泡 ：false
+        // 网景 -> 时间捕获 ：true
+        // js事件流 ： 事件捕获 -> 事件处理 -> 事件冒泡
+        // 事件处理执行顺序 ： 按照函数定义顺序执行
+
+        // 总结：非目标元素捕获 -> 目标元素事件处理 -> 非目标元素冒泡
+
+        // div1_捕获 div2_捕获 div2_冒泡 
+        div1.addEventListener('click',foo1,true);
+        div2.addEventListener('click',foo2,true);
+        div2.addEventListener('click',foo3,false);
+
+        function foo1(){
+            console.log('div1_捕获');
+        }
+        function foo2(){
+            console.log('div2_捕获');
+        }
+        function foo3(){
+            console.log('div2_冒泡');
+        }
+
+    </script>
+</body>
+
+</html>
