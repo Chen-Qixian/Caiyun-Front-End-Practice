@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>懒加载</title>
+    <style>        
+        img{
+            height: 500px;
+            width: 500px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <!-- img的特性：src为空时不加载图片资源 -->
+        <!-- 思路：先设计一个属性asrc存放真实的图片地址，当页面滚动到可以显示图片位置时将asrc值赋值给src. -->
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+        <img src="" alt="img" asrc="1.jpg">
+    </div>
+</body>
+<script type="text/javascript">
+    (function(){
+        let eleGroup,
+            screenHeight,
+            limitHeight;
+        // 做事件监听兼容
+        function addEvent(obj , type , fn){
+            if(obj.addEventListener){
+                obj.addEventListener(type , fn , false); // 冒泡形式
+            }
+            else if(obj.attachEvent){
+                obj.attachEvent('on'+type , fn);
+            }
+        }
+
+        function init(ele){
+            eleGroup = document.getElementsByTagName(ele);
+            // 获取窗口可视区域高度
+            screenHeight = document.documentElement.clientHeight;
+            let len = eleGroup.length;
+            for(let i = 0 ; i < len ; i ++){
+                // js对属性操作的三种方法：获取、设置与删除
+                let src = eleGroup[i].getAttribute('asrc');
+                if(eleGroup[i].offsetTop < screenHeight && src){
+                    eleGroup[i].setAttribute('src',src);
+                    eleGroup[i].removeAttribute('asrc');
+                }
+            }
+        }
+
+        function lazyLoad(){
+            // 懒加载原理:当目标元素到页面顶端距离小于滚动距离+可视窗口距离时,加载图片
+            // 加载原理:对图片的属性进行修改,将asrc赋值给src
+            limitHeight = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.clientHeight - 100;
+            let len = eleGroup.length;
+            for(let i = 0 ; i < len ; i ++){
+                let src = eleGroup[i].getAttribute('asrc');
+                if(eleGroup[i].offsetTop < limitHeight && src){
+                    eleGroup[i].setAttribute('src',src);
+                    eleGroup[i].removeAttribute('asrc');
+                }
+            }
+        }
+
+        init('img');
+        addEvent(window , 'scroll' , lazyLoad);
+    })()
+</script>
+
+</html>
