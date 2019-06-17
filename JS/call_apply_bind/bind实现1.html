@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind的实现-1</title>
+</head>
+
+<body>
+</body>
+<script>
+
+
+    Function.prototype.mybind = function (context){
+        let _this = this;
+        return function(){
+            return _this.apply(context , arguments);
+        }
+    }
+
+
+    // 测试mybind
+    var bar = function () {
+        console.log(this.x);
+    }
+    var foo = {
+        x: 3
+    }
+    
+    var func = bar.mybind(foo);
+    func(); //3
+
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call/apply2</title>
+</head>
+<body>
+</body>
+<script>
+    // 数组添加值
+    let num = -123;
+    let arr1 = [12 , 'foo' , {name:'chen'} , num];
+    let arr2 = ['bar' , 1, 2];
+    Array.prototype.push.apply(arr1,arr2);
+    console.log(arr1);
+
+    // 寻找数组最大值 -> 用apply
+    let arr = [12,5,4,2,8,3,3,6,2,11,3,9,1];
+    let _max = Math.max(arr);
+    console.log(_max); // NaN
+    let _max2 = Math.max.call(Math , arr);
+    console.log(_max2); // NaN : call 必须为参数列表
+    let _max3 = Math.max.apply(Math , arr);
+    console.log(_max3); // 12 : apply 接受参数数组
+
+    
+</script>
+</html>

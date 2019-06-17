@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind的实现-3</title>
+</head>
+
+<body>
+</body>
+<script>
+
+    // 相比于2，实现一种最为严谨的bind()，使得绑定后的函数可以作为构造函数调用。
+    // 通过设置一个中转构造函数F，使绑定后的函数与调用bind()的函数处于同一原型链上，
+    // 用new操作符调用绑定后的函数，返回的对象也能正常使用instanceof，因此这是最严谨的bind()实现。
+    Function.prototype.mybind = function (context) {
+        let _this = this,
+            args = Array.prototype.slice.call(arguments, 1),
+            F = function () { },
+            bound = function () {
+                let innerArgs = Array.prototype.slice.call(arguments);
+                let finalArgs = args.concat(innerArgs);
+                return _this.apply((this instanceof F ? this : context) , finalArgs);
+            }
+        // 维护原型链
+        F.prototype = _this.prototype;
+        bound.prototype = new F();
+
+        return bound;
+    }
+
+
+    // 测试mybind
+    var list = function () {
+        return Array.prototype.slice.call(arguments);
+    }
+
+    var func = list.mybind(undefined, 37);
+    console.log(func());
+    console.log(func(1, 2, 3)); // 37 ,1,2,3
+
+</script>
+
+</html>

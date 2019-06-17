@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind2</title>
+</head>
+
+<body>
+</body>
+<script>
+    // bind 与 call/apply 的区别在于bind返回一个函数等待执行
+    var num = 9;
+    var obj = {
+        num : 81,
+        fn : function(){
+            console.log(this.num);
+        }
+    }
+
+    obj.fn(); // 81 (obj 调用，this 指向obj)
+    var nfn = obj.fn; 
+    nfn();  // 9 (window调用，this指向window)
+    var bindfn = nfn.bind(obj);
+    bindfn(); // 81 (bind返回的函数指向obj)
+   
+
+</script>
+
+</html>

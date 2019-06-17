@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call/apply3</title>
+</head>
+
+<body>
+</body>
+<script>
+    // 验证数据类型 [重要]！
+    function isArray(obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+    }
+
+    let arr = [1, 2, 3];
+    let arrLike = {
+        '0': 1,
+        '1': 2,
+        '2': 3,
+        'length': 3
+    }
+    console.log(isArray(arr));
+    console.log(isArray(arrLike));
+
+    // 类数组使用数组方法（如push，pop等）
+    // 需要将类数组转化成数组
+
+    let toArr = Array.prototype.slice.call(arrLike);
+    toArr.push(4);
+    console.log(toArr); // [1,2,3,4]
+
+</script>
+
+</html>

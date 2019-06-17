@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind的实现-2</title>
+</head>
+
+<body>
+</body>
+<script>
+
+    // 相比于1，考虑函数柯里化，即可以传入多个参数的情况。
+    Function.prototype.mybind = function (context){
+        let _this = this;
+        // 从第一个参数以后开始截取，是预置的默认参数
+        let args = Array.prototype.slice.call(arguments , 1);
+        // bind 本质是返回一个函数。用apply实现。
+        return function(){
+            // bind返回的函数执行的参数
+            let innerArgs = Array.prototype.slice.call(arguments);
+            // 内部参数链接到预置参数后拼接成完整的参数列表
+            let finalArgs = args.concat(innerArgs);
+            return _this.apply(context , finalArgs);
+        }
+    }
+
+
+    // 测试mybind
+    var list = function(){
+        return Array.prototype.slice.call(arguments);
+    }
+    
+    var func = list.mybind(undefined , 37);
+    console.log(func());
+    console.log(func(1,2,3)); // 37 ,1,2,3
+
+</script>
+
+</html>

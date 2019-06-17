@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call/apply4</title>
+</head>
+
+<body>
+</body>
+<script>
+    // 重写log方法，接受任意多参数，并在最开始输出前缀 (app)
+
+    function log(){
+        // 接收到的参数是一个类数组，需要slice转化为数组进行Array上的相应操作。
+        let args = Array.prototype.slice.apply(arguments);
+        args.unshift('app');
+        console.log.apply(console , args);      
+    }
+    log(1);
+    log(1,2);
+   
+
+</script>
+
+</html>

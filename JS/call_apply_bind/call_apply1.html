@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call/apply1</title>
+</head>
+<body>
+</body>
+
+<script>
+    function Fruits() {}
+    Fruits.prototype = {
+        color : 'red',
+        say : function(){
+            console.log('My color is:' + this.color);
+        }
+    }
+    let apple = new Fruits();
+    apple.say(); 
+
+    let banana = {
+        color : 'yellow'
+    }
+    apple.say.call(banana);
+    apple.say.apply(banana);
+</script>
+</html>

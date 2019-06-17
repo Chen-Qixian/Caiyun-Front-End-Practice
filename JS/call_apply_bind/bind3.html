@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind3</title>
+</head>
+
+<body>
+</body>
+<script>
+    // bind 与 call/apply 的区别在于bind返回一个函数等待执行
+    // bind()的另一个最简单的用法是使一个函数拥有预设的初始参数。
+    // 只要将这些参数（如果有的话）作为bind()的参数写在this后面。
+    // 当绑定函数被调用时，这些参数会被插入到目标函数的参数列表的开始位置，传递给绑定函数的参数会跟在它们后面。
+    function list(){
+        return Array.prototype.slice.call(arguments);
+    }
+
+    var list1 = list(1,2,3);
+    var init_37 = list.bind(undefined , 37); // this -> undefined ,预置一个 参数37在参数列表第一位
+
+    var list2 = init_37();
+    var list3 = init_37(1,2,3);
+    console.log(list2); // [37]
+    console.log(list3); // [37,1,2,3]
+
+</script>
+
+</html>

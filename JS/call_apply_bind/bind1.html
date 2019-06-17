@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind1</title>
+</head>
+
+<body>
+</body>
+<script>
+    // bind 与 call/apply 的区别在于bind返回一个函数等待执行
+
+    let altwrite = document.write;
+
+    // 错误写法：报错，this指向window，window上没有write方法
+    // altwrite('hello');
+    // bind改变this指向document
+    altwrite.bind(document)('hello');
+    // 或使用call
+    altwrite.call(document , 'hello'); 
+   
+
+</script>
+
+</html>

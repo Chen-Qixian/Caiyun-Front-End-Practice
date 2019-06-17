@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind4</title>
+</head>
+
+<body>
+</body>
+<script>
+    // 多次绑定bind之后的bind是无效的
+    var bar = function () {
+        console.log(this.x);
+    }
+    var foo = {
+        x: 3
+    }
+    var sed = {
+        x: 4
+    }
+    var func = bar.bind(foo).bind(sed);
+    func(); //3
+
+    var fiv = {
+        x: 5
+    }
+    var func = bar.bind(foo).bind(sed).bind(fiv);
+    func(); //3
+
+</script>
+
+</html>
