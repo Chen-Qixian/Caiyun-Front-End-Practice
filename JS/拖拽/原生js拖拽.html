@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #test {
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+</body>
+<script>
+    let odiv = document.getElementById('test'),
+        drag = false,
+        mouseX,
+        mouseY,
+        objX,
+        objY;
+
+    odiv.onmousedown = function (e) {
+        e = e || window.event;
+        // 进入拖拽状态
+        drag = true;
+        // 记录点击时鼠标位置和目标位置
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        objX = odiv.offsetLeft;
+        objY = odiv.offsetTop;
+
+    }
+
+    document.onmousemove = function (e) {
+        // 不在拖拽状态下就返回
+        if (!drag) return;
+        e = e || window.event;
+        // 鼠标移动距离(e.clientX - mouseX) + 初始位移 objX , 注意最后需要转化成字符串px
+        odiv.style.left = e.clientX - mouseX + objX + 'px';
+        odiv.style.top = e.clientY - mouseY + objY + 'px';
+    }
+
+    document.onmouseup = function () {
+        // 鼠标抬起释放锁
+        drag = false;
+    }
+
+
+
+</script>
+
+</html>

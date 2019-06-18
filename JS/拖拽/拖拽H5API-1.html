@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽H5API-1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background: salmon
+        }
+
+        .box2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" draggable="true" id="source"></div>
+    <br>
+    <div class="box2" id="target"></div>
+
+</body>
+<script>
+    let source = document.getElementById('source');
+    let target = document.getElementById('target');
+
+    source.ondragstart = function(){
+        console.log('start drag');
+    }
+    target.ondragenter = function(){
+        console.log('enter target');
+    }
+    target.ondragover = function(e){
+        console.log('over target');
+        e.preventDefault();
+    }
+    target.ondragleave = function(){
+        console.log('leave target');
+    }
+    target.ondrop = function(){
+        console.log('drop');
+        target.appendChild(source);
+        // document.removeChild(source);
+    }
+</script>
+
+</html>

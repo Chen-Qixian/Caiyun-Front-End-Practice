@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽H5API-2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background: salmon;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" draggable="true" id="source"></div>
+</body>
+<script>
+    // 注意点：1.使用ondragstart和ondrag监听事件
+    // 2.一定要注意拖拽结束时e.clientX == 0 && e.clientY == 0 的边界判断
+    let target = document.getElementById('source');
+
+    let clientX,
+        clientY,
+        objX,
+        objY;
+
+    target.ondragstart = function(e){
+        e = e || window.event;
+        clientX = e.clientX;
+        clientY = e.clientY;
+        objX = target.offsetLeft;
+        objY = target.offsetTop;
+        
+    } 
+
+    target.ondrag = function(e){
+        e = e || window.event;
+        let x = e.clientX,
+            y = e.clientY;
+        // 这一边界判断十分重要！
+        if(x == 0 && y == 0) return;
+        x = x - clientX + objX;
+        y = y - clientY + objY;   
+        target.style.left = x + 'px';
+        target.style.top = y + 'px';
+
+    }
+</script>
+
+</html>
