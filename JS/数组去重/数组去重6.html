@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script>
+    // map
+    function unique(arr){
+        let map = new Map();
+        let array = [];
+        let len = arr.length;
+        for(let i = 0 ; i < len ; i ++){
+            if(!map.has(arr[i])){
+                map.set(arr[i] , true);
+                array.push(arr[i]);
+            }
+        }
+        return array;
+    }
+    var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+    console.log(unique(arr));
+</script>
+
+</html>

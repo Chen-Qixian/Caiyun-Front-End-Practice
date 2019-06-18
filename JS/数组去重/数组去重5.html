@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script>
+    // sort
+    function unique(arr){
+        arr.sort();
+        let array = [arr[0]];
+        for(let i = 1 ; i < arr.length ; i ++){
+            if(arr[i] == arr[i - 1]) continue;
+            array.push(arr[i]);
+        }
+        return array;
+    }
+    var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+    console.log(unique(arr));
+</script>
+
+</html>
