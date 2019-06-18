@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节流</title>
+    <!-- 节流：在防抖的基础上，控制每xms触发一次 -->
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+<script>
+    // 节流函数的封装
+    function throttle(func, delay, mustRun) {
+        let timeout = null,
+            start = new Date();
+        console.log(start);
+        return function () {
+            let _this = this,
+                args = arguments,
+                cur = new Date();
+
+            timeout && clearTimeout(timeout);
+            if (cur - start >= mustRun) {
+                func.apply(_this, args);
+                start = cur;
+            }
+            else {
+                timeout = setTimeout(function () {
+                    func.apply(_this, args);
+                }, delay);
+            }
+        }
+    }
+
+    function realFunc() {
+        console.log('success');
+    }
+
+    // window.addEventListener('scroll' , realFunc , false)
+    window.addEventListener('scroll', throttle(realFunc, 500 , 1000), false);
+
+</script>
+
+</html>

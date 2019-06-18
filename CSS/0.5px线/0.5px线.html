@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>0.5px线</title>
+    <style>
+    .one-px{
+            height: 1px;
+            background-color: #000;
+        }     
+        /* 法1 */
+        .half-scale-1{
+            height: 1px;
+            background-color: #000;
+            transform: scaleY(0.5);
+        }
+        /* 法2 */
+        .half-scale-2{
+            height: 1px;
+            background : linear-gradient(0deg , #fff , #000);
+        }
+        /* 法3 */
+        .half-scale-3{
+            height: 1px;
+            box-shadow: 0 0.5px 0 #000;
+        }
+    </style>
+</head>
+
+<body>
+    <p>1px</p>
+    <div class="one-px"></div>
+    <p>方法一：0.5px</p>
+    <div class="half-scale-1"></div>
+    <p>方法二：0.5px</p>
+    <div class="half-scale-2"></div>
+    <p>方法三：0.5px</p>
+    <div class="half-scale-3"></div>
+</body>
+
+</html>

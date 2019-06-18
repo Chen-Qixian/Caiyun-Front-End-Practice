@@ -38,8 +38,10 @@
     }
 
     var func = list.mybind(undefined, 37);
-    console.log(func());
-    console.log(func(1, 2, 3)); // 37 ,1,2,3
+    let v1 = func();
+    let v2 = func(1,2,3);
+    console.log(v1);
+    console.log(v2); // 37 ,1,2,3
 
 </script>
 
