@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自己实现new</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.sayName = function() {
+            console.log(this.name);
+        }
+    }
+
+    let New = function(P) {
+        // 1.创建一个obj对象，从参数中获取new 向构造函数传参
+        let obj = {};
+        let args = Array.prototype.slice.call(arguments , 1);
+        // 2.使obj的原型链指向构造函数的原型
+        obj.__proto__ = P.prototype;
+        P.prototype.constructor = P;
+        // 3.执行构造函数里的方法
+        P.apply(obj , args);
+        // 4.返回该对象
+        return obj;
+    }
+
+    let p1 = New(Person , 'chen' , 21);
+    let p2 = New(Person , 'liu' , 20);
+    console.log(p1.name , p1.age);
+    console.log(p2.name , p2.age);
+    p1.sayName();
+    p2.sayName();
+    console.log(p1.__proto__ == p2.__proto__);
+    console.log(p1.__proto__ == Person.prototype);
+</script>
+
+</html>
