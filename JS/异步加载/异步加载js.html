@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js异步加载脚本</title>
+    <!-- 1.使用H5 async属性：脚本不保证按序，仅适用于src的外部脚本 -->
+    <script src="jquery.js" async="async"></script>
+    <!-- 2.使用H5 defer属性：脚本保证按序执行，仅IE支持 -->
+    <script src="jquery.js" defer="defer"></script>
+</head>
+
+<body>
+</body>
+<script>
+    // 3.自己封装的异步加载
+    function asyncLoad(url, callback) {
+        // 动态创建script标签
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+
+        if (script.readyState) {
+            script.onreadystatechange = function () {
+                if(script.readyState == 'loaded' || script.readyState == 'complete') {
+                    callback();
+                    script.onreadystatechange = null;
+                }
+            }
+        }
+        else {
+            script.onload = function(e) {
+                callback();
+            }
+        }
+
+        script.src = url;
+        document.body.appendChild(script);
+
+    }
+</script>
+
+</html>
