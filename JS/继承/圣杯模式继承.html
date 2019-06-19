@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯模式继承</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+<script>
+    let inherit = (function() {
+        function F() {}
+        return function(origin , target) {
+            F.prototype = origin.prototype;
+            target.prototype = new F();
+            target.prototype.constructor = target;
+            target.prototype.uber = origin.prototype;
+        }
+    })()
+
+    inherit(Father, Son);
+    function Father() { }
+    function Son() { }
+    Father.prototype.lastName = "Chen";
+    var father = new Father();
+    var son = new Son();
+    Son.prototype.firstName = "Xianxian";
+    console.log(son);
+    console.log(father);
+</script>
+
+</html>

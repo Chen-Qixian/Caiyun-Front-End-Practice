@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深克隆</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+<script>
+
+    function deepClone(origin , target){
+        target = target || {};
+        let toStr = Object.prototype.toString,
+            arrStr = '[object Array]';
+        
+        for(let prop in origin){
+            if(origin.hasOwnProperty(prop)){
+                if(origin[prop] !== null && typeof origin[prop] == "object") {
+                    target[prop] = (toStr.call(origin[prop]) == arrStr) ? [] : {};
+                    deepClone(origin[prop] , target[prop]);
+                }
+                else {
+                    target[prop] = origin[prop];
+                }
+            }
+        }
+
+    }
+    // test
+    var obj = {
+        name: "ChenQX",
+        age: 18,
+        card: ['visa', 'unionpay', 'master'],
+        son: {
+            name: "LiuCJ",
+            age: 18,
+            card: ['unionpay'],
+            grade: {
+                math: 59,
+                english: 58,
+                history: 57
+            }
+        },
+        nullprop: null
+    };
+    var obj1 = {};
+    deepClone(obj, obj1);
+    obj1['card'].push('ICBC');
+    console.log(obj);
+    console.log(obj1);
+</script>
+
+</html>
