@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async-await1</title>
+</head>
+
+<body>
+    <h2>Async&Await</h2>
+</body>
+<script>
+    // 解决异步问题-- Promise + async + await
+
+    async function test() {
+        const p = await new Promise((resolve , reject) => {
+            setTimeout(() => {
+                resolve('async await test ...');
+            } , 2000) 
+        });
+        console.log(p);
+    }
+    
+    test();
+
+</script>
+
+</html>
