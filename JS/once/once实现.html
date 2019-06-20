@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>once的实现</title>
+</head>
+
+<body>
+    <h2>Once</h2>
+</body>
+<script>
+    function once(func) {
+        let flag = true;
+        return function() {
+            if(flag) {
+                func.apply(null, arguments);
+                flag = false;
+            }
+            return undefined;
+        }
+    }
+
+    function log(x) {
+        console.log(x);
+    }
+    once(log(1));
+</script>
+
+</html>
