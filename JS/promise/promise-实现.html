@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise的实现</title>
+</head>
+
+<body>
+    <h2>Promise</h2>
+    <div id="ajax-res"></div>
+</body>
+<script>
+    // 核心：状态机转化
+    function MyPromise(constructor) {
+        let self = this;
+        self.status = 'pending';
+        self.value = undefined;
+        self.reason = undefined;
+        function resolve(value) {
+            if (self.status == 'pending') {
+                self.value = value;
+                self.status = 'resolved';
+            }
+        }
+
+        function reject(reason) {
+            if (self.status == 'pending') {
+                self.reason = reason;
+                self.status = 'rejected';
+            }
+        }
+        // 一定要有传入构造器的执行
+        try {
+            constructor(resolve, reject);
+        }
+        catch (e) {
+            reject(e);
+        }
+    }
+    // 原型链上的then
+    MyPromise.prototype.then = function(onResolved , onRejected) {
+        let self = this;
+        // console.log(123);
+        switch (self.status) {
+            case 'resolved' : {
+                // console.log(456);
+                onResolved(self.value);
+                break;
+            }
+            case 'rejected' : {
+                onRejected(self.reason);
+                break;
+            }
+            default :;
+        }
+    }
+
+    let p = new MyPromise(function(resolve , reject) {
+        resolve(1);
+    });
+    p.then(function(x) {
+        console.log(x);
+    })
+
+</script>
+
+</html>
