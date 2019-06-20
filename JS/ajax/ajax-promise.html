@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise-ajax</title>
+</head>
+
+<body>
+    <h2>Promise-Ajax</h2>
+    <div id="ajax-res"></div>
+</body>
+<script>
+    function newXHR() {
+        let xhr;
+        if(window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        }
+        else {
+            xhr = new ActiveXObject('Microsoft.XMLHttp');
+        }
+        return xhr;
+    }
+    function ajax(method, url , data) {
+        let xhr = newXHR();
+        return new Promise(function(resolve , reject) {
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    if(xhr.status == 200){
+                        resolve(xhr.responseText);
+                    }
+                    else {
+                        reject(xhr.status);
+                    }
+                }
+            }
+            xhr.open(method , url , true);
+            xhr.send(data);
+        })
+    }
+
+    let log = document.getElementById('ajax-res');
+    let p = ajax('GET' , 'test.asp');
+
+    p.then(function(text) {
+        log.innerHTML = text;
+    }).catch(function(text) {
+        log.innerHTML = 'ERROR' + text;
+    })
+    
+</script>
+
+</html>

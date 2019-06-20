@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise-1</title>
+</head>
+
+<body>
+    <h2>Promise</h2>
+    <div id="promise"></div>
+</body>
+<script>
+    let promise = document.getElementById('promise');
+    while(promise.children.length > 1) {
+        promise.removeChild(promise.children[promise.children.length - 1]);
+    }
+
+    function log(s) {
+        let p = document.createElement('p');
+        p.innerHTML = s;
+        promise.appendChild(p);
+    }
+    // 一个Promise对象内部正常执行，成功调用resolve方法，失败调用reject方法
+    // Promise对象有两个方法then和catch成功调用then <-> 与resolve对应
+    new Promise(function(resolve , reject) {
+        log('start new Promise ...');
+        let timeout = Math.random() * 2;
+        log('set timeout to: ' + timeout + ' seconds.');
+        setTimeout(function() {
+            if(timeout < 1) {
+                log('call resolve() ...');
+                resolve('200 OK');
+            }
+            else {
+                log('call reject() ...');
+                reject('timeout in ' + timeout + ' seconds.');
+            }
+        } , timeout * 1000)
+    }).then(function(r) {
+        log('Done! ' + r);
+    }).catch(function(r) {
+        log('Failed! ' + r);
+    })
+
+</script>
+
+</html>

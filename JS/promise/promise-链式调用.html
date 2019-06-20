@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise-2</title>
+</head>
+
+<body>
+    <h2>Promise</h2>
+    <div id="promise"></div>
+</body>
+<script>
+    let promise = document.getElementById('promise');
+    while(promise.children.length > 1) {
+        promise.removeChild(promise.children[promise.children.length - 1]);
+    }
+
+    function log(s) {
+        let p = document.createElement('p');
+        p.innerHTML = s;
+        promise.appendChild(p);
+    }
+    // 串行执行若干异步任务：任务1->任务2->...若遇到任务失败则执行错误处理
+    // job1.then(job2).then(job3)...catch(handleError)
+    // 其中job1,job2,job3... 都是Promise对象
+
+
+    // 加法和乘法函数都返回一个promise对象，形成链式调用
+    function mul(input) {
+        return new Promise(function(resolve , reject) {
+            log('mul ' + input);
+            setTimeout(resolve , 500 , input * input);
+        })
+    }
+
+    function add(input) {
+        return new Promise(function(resolve , reject) {
+            log('add ' + input);
+            setTimeout(resolve , 500 , input + input);
+        })
+    }
+
+    let p = new Promise(function(resolve , reject) {
+        log('start new promise ...');
+        setTimeout(resolve , 500 , 123);
+    })
+
+    //  then里面是一个resolve执行的函数！
+    p.then(add).then(mul).then(add).then(mul).then(function(res) {
+        log('got value: ' + res);
+    })
+ 
+    
+</script>
+
+</html>
