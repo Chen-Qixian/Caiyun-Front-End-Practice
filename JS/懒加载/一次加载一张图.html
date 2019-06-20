@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>一次加载一张图-1</title>
+</head>
+
+<body>
+    <div id="mypic">loading...</div>
+</body>
+<script>
+    let obj = new Image();
+    obj.src = "1.jpg";
+    obj.onload = function(){
+        alert('height:' + obj.height + ' width:' + obj.width);
+        document.getElementById('mypic').innerHTML = '<img src="' + this.src + '"/>';
+    }
+</script>
+
+</html>

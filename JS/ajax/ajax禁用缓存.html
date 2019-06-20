@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax禁用缓存</title>
+</head>
+
+<body>
+    <h2>Ajax</h2>
+    <button type="button" onclick="ajax()">请求数据</button>
+    <div class="myDiv"></div>
+</body>
+<script>
+    function ajax() {
+        let xhr;
+        if(window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        }
+        else {
+            xhr = new ActiveXObject('Microsoft.XMLHttp');
+        }
+
+        xhr.open('GET' , 'test.asp' , true);
+        // m1
+        xhr.setRequestHeader('If-Modified-Since' , '0');
+        // m2
+        xhr.setRequestHeader('Cache-Control' , 'no-cache');
+        // m3
+        xhr.open('GET' , 'test.asp?fresh=' + Math.random() , true);
+        // m4
+        xhr.open('GET' , 'test.asp?time=' + new Date().getTime() , true);
+        // jquery
+        $.ajaxSetup({cache:false});
+    }
+</script>
+
+</html>
