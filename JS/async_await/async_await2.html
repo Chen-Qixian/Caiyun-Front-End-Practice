@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async-await2</title>
+</head>
+
+<body>
+    <h2>Async&Await</h2>
+</body>
+<script>
+    // 解决异步问题-- Promise + async + await
+
+    async function test(str) {
+        return await new Promise(resolve => {
+            setTimeout(()=>{
+                resolve(str)
+            } , 1000);
+        })
+    }
+    // 1. async + await串行处理
+    // 先执行完await后面promise对象中的内容，可读性好，在写法上更类似于同步代码
+    const serialFn = async () => {
+        console.time('serialFn');
+        console.log(await test('1'));
+        console.log(await test('2'));
+        console.timeEnd('serialFn');
+    }
+    // 串行入口
+    serialFn();
+
+    // 2. async + await并行处理
+    // 多个promise直接发起请求，再进行await 操作
+    const parallel = async() => {
+        console.time('parallel');
+        const parallel1 = test('p1');
+        const parallel2 = test('p2');
+
+        console.log(await parallel1);
+        console.log(await parallel2);
+        console.timeEnd('parallel');
+    }
+    // 并行入口
+    parallel();
+</script>
+
+</html>
