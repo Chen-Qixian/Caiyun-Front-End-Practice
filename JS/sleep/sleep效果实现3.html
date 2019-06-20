@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sleep效果实现3</title>
+</head>
+
+<body>
+    <h2>Sleep</h2>
+</body>
+<script>
+    // 使用async,await封装
+    function sleep(delay) {
+        return new Promise((resolve) => setTimeout(resolve , delay));
+    }
+    async function test() {
+        let tmp = await sleep(1000);
+        console.log(111);
+        return tmp;
+    }
+
+    test();
+
+</script>
+
+</html>

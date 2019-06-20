@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sleep效果实现2</title>
+</head>
+
+<body>
+    <h2>Sleep</h2>
+</body>
+<script>
+    // 使用promise封装
+    function sleep(delay) {
+        let p = new Promise((resolve, reject) => {
+            console.log(111);
+            // 注意定时器第一个参数为函数定义，若为函数调用则失去定时器效果
+            // 参数传递从delay参数后面开始传递  
+            setTimeout(resolve, delay, 222);
+        })
+
+        return p;
+    }
+    sleep(1000).then(function (x) {
+        console.log(x);
+    })
+</script>
+
+</html>
