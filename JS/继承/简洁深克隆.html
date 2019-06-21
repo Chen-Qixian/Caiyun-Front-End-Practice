@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简洁深克隆</title>
+</head>
+
+<body>
+    <h2>简洁深克隆</h2>
+</body>
+<script>
+   var arr = ['old', 1, true, ['old1', 'old2'], {old: 1}];
+   function deepClone (arr) {
+       let newarr = JSON.parse(JSON.stringify(arr));
+       return newarr;
+   }
+   let na = deepClone(arr);
+   na[3].push('old3');
+   console.log(arr);
+   console.log(na);
+</script>
+
+</html>
