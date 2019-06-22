@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie增删改查</title>
+</head>
+
+<body>
+    <h2>Cookie</h2>
+</body>
+<script>
+    // 创建cookie
+    document.cookie = 'username=ChrisChen;\
+    expires=Sun, 23 June 2019 12:00:00 UTC;\
+    path=/';
+
+    // 读取cookie
+    let x = document.cookie;
+
+    // 改变cookie,只需向创建一样覆盖它即可
+    document.cookie = 'username=ChenQixian;\
+    expires=Sun, 23 June 2019 12:00:00 UTC;\
+    path=/';
+
+    // 删除cookie 只需将时间设置为过去的即可 注意路径必须有效
+    document.cookie = 'username=ChenQixian;\
+    expires=Thu, 1 Jan 00:00:00 UTC;\
+    path=/';
+
+
+</script>
+
+</html>

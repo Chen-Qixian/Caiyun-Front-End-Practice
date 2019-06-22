@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie实例</title>
+    <script>
+        let msg = document.getElementsByClassName('msg')[0];
+
+        // 设置cookie函数，访问者填写的姓名会保存在cookie变量中
+        // 功能：设置cookie名字，值和过期时间
+        function setCookie(cname, cvalue, exdays) {
+            let day = new Date();
+            day.setTime(day.getTime() + exdays * 24 * 60 * 60 * 1000);
+            // toUTCString根据世界时间转换成字符串
+            let expires = 'expires=' + day.toUTCString();
+            console.log(expires);
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            console.log(document.cookie);
+        }
+
+        // 返回指定名称的cookie值
+        function getCookie(cname) {
+            let name = cname + '=';
+            // 对函数编码的URI进行解码
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // 检查cookie是否存在，并给出相应提示
+        function checkCookie() {
+            let username = getCookie('username');
+            if (username != '') {
+                alert('welcome again! ' + username);
+            }
+            else {
+                username = prompt('please enter your name:', '');
+                if (username != '' && username != null) {
+                    console.log(username);
+                    setCookie('username', username, 30);
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="checkCookie()">
+    <h2>Cookie</h2>
+    <div class="msg"></div>
+</body>
+
+
+</html>
