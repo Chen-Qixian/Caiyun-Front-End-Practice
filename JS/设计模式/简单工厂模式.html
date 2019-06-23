@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简单工厂模式</title>
+</head>
+
+<body>
+    <h2>简单工厂模式</h2>
+    
+</body>
+<script>
+    // 优点：解决一类相似的问题类似于生活中的工厂生产批量产品
+    // 缺点：对象类型无法识别
+    function CreatePerson (name , age , sex) {
+        let obj = new Object();
+        obj.name = name;
+        obj.age = age;
+        obj.sex = sex;
+        obj.sayName = function() {
+            console.log(obj.name);
+        }
+        return obj;
+    }
+
+    let p1 = new CreatePerson('Chen' ,21 , 'male');
+    let p2 = new CreatePerson('Yan' , 20 , 'female');
+
+    console.log(p1);
+    console.log(p2);
+
+</script>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复杂工厂模式</title>
+</head>
+
+<body>
+    <h2>复杂工厂模式</h2>
+    <p>将成员对象的实例化推迟到子类中，子类重写父类接口方法指定自己的对象类型</p>
+    <p>父类处理一般性的问题，子类负责实现具体的业务逻辑</p>
+
+</body>
+<script>
+    // 父类实现一般性问题，自行车构造函数
+    let BicycleShop = function(name) {
+        this.name = name;
+        this.method = function() {
+            return this.name;
+        }
+    }
+    // 自行车商店原型
+    BicycleShop.prototype = {
+        constructor : BicycleShop,
+        sellBicycle : function(model) {
+            let bicycle = this.createBicycle(model);
+            bicycle.A();
+            bicycle.B();
+        },
+        createBicycle : function(model) {
+            throw new Error('Must override this method in sub class!')
+        }
+    }
+
+    // 子类构造函数
+    let BicycleChild = function(name) {
+        this.name = name;
+        // 构造继承
+        BicycleShop.call(this , name);
+    }
+
+    // 封装原型继承
+    function inherit(origin , target) {
+        function F() {};
+        F.prototype = origin.prototype;
+        target.prototype = new F();
+        target.prototype.constructor = target;
+        target.uber = origin.prototype;
+    }
+
+    // 继承
+    inherit(BicycleShop , BicycleChild);
+
+    // 子类重写父类方法
+    BicycleChild.prototype.createBicycle = function() {
+        let A = function() {
+            console.log('processing A');
+        }
+
+        let B = function() {
+            console.log('processing B');
+        }
+
+        return {
+            A : A,
+            B : B
+        }
+    }
+
+    // 实例化
+    let childClass = new BicycleChild('Chen');
+    console.log(childClass.name);
+    console.log(childClass.sellBicycle('haha'));
+</script>
+
+</html>
