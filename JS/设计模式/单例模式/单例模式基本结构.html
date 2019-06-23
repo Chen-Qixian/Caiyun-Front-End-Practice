@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单例模式</title>
+</head>
+
+<body>
+    <h2>单例模式</h2>
+    <p>用来划分命名空间，将一批方法或属性组织在一起的对象，如可以被实例化，那么使能被实例化一次。</p>
+
+</body>
+<script>
+    // 单例模式构造函数
+    let Singleton = function(name) {
+        this.name = name;
+        this.instance = null;
+    }
+
+    Singleton.prototype.getName = function() {
+        return this.name;
+    }
+
+    function getInstance(name) {
+        // this.instance对象只能被实例化一次！
+        if(!this.instance) {
+            this.instance = new Singleton(name);
+        }
+        return this.instance;
+    }
+
+    // 可是实例化，但只能实例化一次，因此a,b为相同的对象
+    let a = getInstance('aa');
+    let b = getInstance('bb');
+
+    console.log(a === b); // true
+    console.log(a.getName()); //'aa'
+    console.log(b.getName()); //'bb'
+
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单例模式弹窗效果</title>
+</head>
+
+<body>
+    <h2>单例模式弹窗效果</h2>
+    <p>弹窗希望频繁点击按钮不会显示多个新的弹窗内容。</p>
+    <button>click</button>
+</body>
+<script>
+    // 单例模式构造函数
+    let CreateDiv = function(html) {
+        this.html = html;
+        this.init();
+    }
+
+    CreateDiv.prototype.init = function() {
+        let newdiv = document.createElement('div');
+        newdiv.innerHTML = this.html;
+        newdiv.style.display = 'block';
+        document.body.appendChild(newdiv);
+    }
+
+    // 闭包形式的单体模式
+    let createWindow = (function(){
+        let instance = null;
+        return function(text) {
+            if(!instance){
+                instance = new CreateDiv(text);
+            }
+            return instance;
+        }
+    })()
+
+    // 可实例化，但只能实例化一次，因此a,b为相同的对象
+    let btn = document.getElementsByTagName('button')[0];
+    btn.onclick = function() {
+        createWindow('hello world!');
+    }
+
+</script>
+
+</html>
