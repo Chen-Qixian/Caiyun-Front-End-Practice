@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>装饰模式</title>
+</head>
+    <h2>装饰模式</h2>
+    <p>在不想使用继承使子类膨胀的前提下扩展类，动态地为对象添加一些职责。</p>
+<body>
+</body>
+<script>
+    // AOP装饰函数
+    Function.prototype.before = function(fn) {
+        const self = this;
+        return function() {
+            fn.apply(this,arguments);
+            return self.apply(this,arguments);
+        }
+    }
+
+    Function.prototype.after = function(fn) {
+        const self = this;
+        return function() {
+            self.apply(this, arguments);
+            return fn.apply(this, arguments);
+        }
+    }
+
+    // 实现装饰模式
+    const wear1 = function() {
+        console.log('wear1');
+    }
+    const wear2 = function() {
+        console.log('wear2');
+    }
+    const wear3 = function() {
+        console.log('wear3');
+    }
+    const wear = wear1.after(wear2).after(wear3);
+    wear();
+</script>
+
+</html>
