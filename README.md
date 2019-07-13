@@ -1,3 +1,3 @@
 # Front End Interview Practice
 
-Code for front end intern interview practice.
+Codes for front end practice.
